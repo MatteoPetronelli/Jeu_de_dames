@@ -10,7 +10,7 @@ public class InterfaceGraphique extends JPanel {
     private FenetreJeu fenetreJeu; // Référence à FenetreJeu
     private Jeu jeu; // Instance du jeu
     private JButton[][] buttons; // Tableau de boutons pour représenter les cases
-    private static final int TAILLE = 8;
+    private static final int TAILLE = 10;
 
     public InterfaceGraphique(FenetreJeu fenetreJeu) {
         this.fenetreJeu = fenetreJeu;
@@ -119,3 +119,5 @@ public class InterfaceGraphique extends JPanel {
         }
     }
 }
+
+
