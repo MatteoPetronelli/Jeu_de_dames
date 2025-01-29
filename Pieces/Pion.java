@@ -1,3 +1,6 @@
+package Pieces;
+import Logique_du_jeu.*;
+import Graphique.*;
 // Classe représentant un pion (héritée de Piece)
 public class Pion extends Piece {
     public Pion(Couleur couleur) {

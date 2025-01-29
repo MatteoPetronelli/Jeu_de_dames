@@ -1,3 +1,6 @@
+package Graphique;
+import Logique_du_jeu.*;
+import Pieces.*;
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashSet;

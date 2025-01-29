@@ -1,7 +1,10 @@
+package Graphique;
+import Logique_du_jeu.*;
+import Pieces.*;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.*;
 
 public class FenetreJeu extends JFrame {
     private Jeu jeu;  // Instance du jeu;

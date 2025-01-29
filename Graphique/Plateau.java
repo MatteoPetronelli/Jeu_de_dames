@@ -1,9 +1,11 @@
+package Graphique;
+import Logique_du_jeu.*;
+import Pieces.*;
 // Classe représentant le plateau de jeu
-
 public class Plateau {
     @SuppressWarnings("FieldMayBeFinal")
     private Case[][] cases;
-    private static int TAILLE = 8;
+    private final int TAILLE = 10;
 
     public Plateau() {
         cases = new Case[TAILLE][TAILLE];

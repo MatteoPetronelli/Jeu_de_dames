@@ -1,3 +1,6 @@
+package Logique_du_jeu;
+import Pieces.*;
+import Graphique.*;
 public class Jeu {
     private Plateau plateau;
     private Joueur joueur1;

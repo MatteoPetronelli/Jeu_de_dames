@@ -1,5 +1,5 @@
-
 import javax.swing.SwingUtilities;
+import Graphique.*;
 
 public class Main {
     public static void main(String[] args) {

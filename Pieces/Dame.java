@@ -1,3 +1,6 @@
+package Pieces;
+import Logique_du_jeu.*;
+import Graphique.*;
 // Classe représentant une dame (héritée de Piece)
 public class Dame extends Piece {
     public Dame(Couleur couleur) {

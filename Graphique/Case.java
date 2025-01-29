@@ -1,3 +1,5 @@
+package Graphique;
+import Pieces.*;
 // Classe représentant une case du plateau de jeu
 public class Case {
     @SuppressWarnings("FieldMayBeFinal")

@@ -1,3 +1,6 @@
+package Pieces;
+import Logique_du_jeu.*;
+import Graphique.*;
 // Classe représentant une pièce de jeu
 public abstract class Piece {
     private Couleur couleur;

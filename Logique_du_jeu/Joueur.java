@@ -1,4 +1,5 @@
-
+package Logique_du_jeu;
+import Graphique.Plateau;
 import java.util.Scanner;
 
 public class Joueur {

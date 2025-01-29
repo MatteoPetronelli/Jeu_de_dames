@@ -1,3 +1,5 @@
+package Logique_du_jeu;
+import Pieces.*;
 public class Coup {
     private int xDepart, yDepart, xArrivee, yArrivee;
     private boolean captureEffectuee;
