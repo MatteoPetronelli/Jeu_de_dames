@@ -1,7 +1,7 @@
 package Pieces;
 import Logique_du_jeu.*;
 import Graphique.*;
-// Classe représentant une dame (héritée de Piece)
+
 public class Dame extends Piece {
     public Dame(Couleur couleur) {
         super(couleur);
@@ -9,56 +9,51 @@ public class Dame extends Piece {
 
     @Override
     public boolean estDeplacementValide(int xDepart, int yDepart, int xArrivee, int yArrivee, Plateau plateau) {
-
-        int diffX = xArrivee - xDepart;  // Différence en X
-        int diffY = Math.abs(yArrivee - yDepart);  // Différence en Y (absolue)
-
-        System.out.println("Vérification du déplacement : (" + xDepart + ", " + yDepart + ") -> (" + xArrivee + ", " + yArrivee + ")");
-        System.out.println("Différence X : " + diffX + ", Différence Y : " + diffY);
-
-        // Vérification du déplacement simple (une case en diagonale)
-        if ((diffX == 1 || diffX == -1) && diffY == 1 && xArrivee >= 0 && xArrivee < plateau.getTaille() && yArrivee >= 0 && yArrivee < plateau.getTaille()) {
-            if (!plateau.getCase(xArrivee, yArrivee).estOccupee()) {
-                System.out.println("Déplacement simple valide : (" + xDepart + ", " + yDepart + ") à (" + xArrivee + ", " + yArrivee + ")");
-                return true;
-            } else {
-                System.out.println("Case d'arrivée occupée pour déplacement simple : (" + xArrivee + ", " + yArrivee + ")");
-            }
-        } else {
-            System.out.println("Le déplacement simple n'est pas valide.");
+        // Vérifier que le déplacement est diagonal
+        int diffX = xArrivee - xDepart;
+        int diffY = yArrivee - yDepart;
+        
+        // Le déplacement doit être diagonal (|diffX| = |diffY|)
+        if (Math.abs(diffX) != Math.abs(diffY)) {
+            return false;
         }
 
-        // Vérification de la capture (deux cases en diagonale)
-        if (diffX == 2 && diffY == 2 || diffX == -2 && diffY == 2) {
-            int xIntermediaire = (xDepart + xArrivee) / 2;
-            int yIntermediaire = (yDepart + yArrivee) / 2;
-            Case caseIntermediaire = plateau.getCase(xIntermediaire, yIntermediaire);
+        // Vérifier que la destination est dans les limites du plateau
+        if (xArrivee < 0 || xArrivee >= plateau.getTaille() || 
+            yArrivee < 0 || yArrivee >= plateau.getTaille()) {
+            return false;
+        }
 
-            System.out.println("Vérification de la capture :");
-            System.out.println("Case intermédiaire : (" + xIntermediaire + ", " + yIntermediaire + ")");
-            if (caseIntermediaire.estOccupee()) {
-                Piece pieceIntermediaire = caseIntermediaire.getPiece();
-                System.out.println("La pièce à capturer est : " + pieceIntermediaire);
-                if (pieceIntermediaire.getCouleur() != getCouleur() && !plateau.getCase(xArrivee, yArrivee).estOccupee()) {
-                    System.out.println("Capture valide : (" + xDepart + ", " + yDepart + ") à (" + xArrivee + ", " + yArrivee + ")");
-                    return true;
-                } else {
-                    System.out.println("Capture impossible : la case intermédiaire est occupée par une pièce de la même couleur ou la case d'arrivée n'est pas vide.");
+        // Vérifier que la case d'arrivée est libre
+        if (plateau.getCase(xArrivee, yArrivee).estOccupee()) {
+            return false;
+        }
+
+        // Vérifier le chemin
+        int pasX = Integer.compare(diffX, 0);  // -1, 0 ou 1
+        int pasY = Integer.compare(diffY, 0);  // -1, 0 ou 1
+        
+        int x = xDepart + pasX;
+        int y = yDepart + pasY;
+        boolean pieceTrouvee = false;
+        int piecesRencontrees = 0;
+
+        while (x != xArrivee || y != yArrivee) {
+            if (plateau.getCase(x, y).estOccupee()) {
+                // Vérifier que la pièce est de couleur opposée
+                if (plateau.getCase(x, y).getPiece().getCouleur() == this.getCouleur()) {
+                    return false;
                 }
-            } else {
-                System.out.println("Aucune pièce à capturer à (" + xIntermediaire + ", " + yIntermediaire + ")");
+                piecesRencontrees++;
+                System.out.println(piecesRencontrees);
             }
-        } else {
-            System.out.println("Le déplacement pour la capture n'est pas valide.");
+            x += pasX;
+            y += pasY;
         }
 
-        // Si aucune des conditions n'est remplie, le déplacement est invalide
-        System.out.println("Déplacement invalide.");
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return getCouleur().toString().charAt(0) + "D"; // Exemple : BD pour dame blanche, ND pour dame noire
+        // Le déplacement est valide si:
+        // - soit c'est un déplacement simple sans capture (aucune pièce sur le chemin)
+        // - soit c'est une capture (exactement une pièce adverse sur le chemin)
+        return piecesRencontrees == 0 || piecesRencontrees == 1;
     }
 }
