@@ -18,11 +18,11 @@ public class Plateau {
                 cases[i][j] = new Case(i, j, (i + j) % 2 != 0);  // Case noire ou blanche
 
                 // Placement des pièces
-                if ((i + j) % 2 != 0 && (i < 3 || i > 4)) {
+                if ((i + j) % 2 != 0) {
                     // Si la case est noire et dans les 3 premières ou 3 dernières rangées
-                    if (i < 3) {
+                    if (i < 4) {
                         cases[i][j].setPiece(new Pion(Couleur.NOIR)); // Pièce noire
-                    } else if (i > 4) {
+                    } else if (i > 5) {
                         cases[i][j].setPiece(new Pion(Couleur.BLANC)); // Pièce blanche
                     }
                 }
@@ -53,3 +53,4 @@ public class Plateau {
         return builder.toString();
     }
 }
+
