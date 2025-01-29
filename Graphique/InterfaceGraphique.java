@@ -26,10 +26,7 @@ public class InterfaceGraphique extends JPanel {
     }
 
     public JButton getButton(int x, int y) {
-        if (x >= 0 && x < 8 && y >= 0 && y < 8) {
-            return buttons[x][y];
-        }
-        return null;
+        return buttons[x][y];
     }
 
     // Méthode pour initialiser le plateau avec des boutons
@@ -122,5 +119,3 @@ public class InterfaceGraphique extends JPanel {
         }
     }
 }
-
-

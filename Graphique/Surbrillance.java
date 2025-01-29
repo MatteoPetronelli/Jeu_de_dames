@@ -23,12 +23,7 @@ public class Surbrillance {
 
     // Méthode pour réinitialiser toute la surbrillance
     public void reset() {
-        // Parcourir le plateau de manière sécurisée
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                enleverSurbrillance(i, j);
-            }
-        }
+        enleverSurbrillance();
         casesSurbrillees.clear();
         plateauGraphique.repaint(); // Redessiner l'interface graphique pour réinitialiser la surbrillance
     }
@@ -59,16 +54,8 @@ public class Surbrillance {
         for (Point caseSurbrillee : casesSurbrillees) {
             int x = caseSurbrillee.x;
             int y = caseSurbrillee.y;
-            surbrillerCases(x, y);
+            plateauGraphique.getButton(x, y).setBorder(BorderFactory.createLineBorder(Color.YELLOW, 3)); // Bordure rouge
         }
-    }
-
-    public void surbrillerCases(int x, int y) {
-        JButton button = plateauGraphique.getButton(x, y);
-        if (button == null) {
-            return; // Ignorer les coordonnées hors limites
-        }
-        button.setBorder(BorderFactory.createLineBorder(Color.YELLOW, 3)); // Bordure rouge
     }
 
     // Méthode pour enlever la surbrillance des cases
@@ -77,13 +64,6 @@ public class Surbrillance {
             int x = caseSurbrillee.x;
             int y = caseSurbrillee.y;
             plateauGraphique.getButton(x, y).setBorder(BorderFactory.createEmptyBorder()); // Pas de bordure
-        }
-    }
-
-    public void enleverSurbrillance(int x, int y) {
-        JButton button = plateauGraphique.getButton(x, y);
-        if (button != null) {
-            button.setBorder(null);
         }
     }
 }
